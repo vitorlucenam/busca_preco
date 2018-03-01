@@ -91,7 +91,7 @@ public class ProductDAO {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
 
-                Product u = new Product(dados[0], dados[1], dados[2], dados[3]);
+                Product u = new Product(dados[0], dados[1], dados[2], Double.parseDouble(dados[3]));
                 products.add(u);
             }
 
