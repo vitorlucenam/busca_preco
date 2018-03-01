@@ -1,6 +1,6 @@
 package model;
 
-public class Search {
+public class Product {
     private String name;
     private String link;
     private String url_image;

@@ -17,13 +17,13 @@ public class SearchDAO {
         save_data();
     }
     public void change(Search u)throws Exception{ //alterar
-        Search aux = search_by_value(u.getLink());
+        Search aux = search_by_value(u.getValue());
         aux.setValue(u.getValue());
         save_data();
     }
     public Search search_by_value(String value){
         for(Search aux: searchs){
-            if(aux.getLink()==value){
+            if(aux.getValue()==value){
                 return aux;
             }
         }
@@ -31,7 +31,7 @@ public class SearchDAO {
     }
 
     public void save_data() throws Exception {
-        File f = new File("searchs_history.txt");
+        File f = new File("history.txt");
 
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -64,7 +64,7 @@ public class SearchDAO {
     }
 
     static {
-        File f = new File("searchs_history.txt");
+        File f = new File("history.txt");
 
         FileReader fr = null;
         BufferedReader br = null;
