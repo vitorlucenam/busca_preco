@@ -11,18 +11,16 @@ public class UserDAO {
         users.add(u);
         save_data();
     }
-    public void delete(int cpf) throws Exception{ //excluir
-        User aux = search_by_id(cpf);
+    public void delete(int id) throws Exception{ //excluir
+        User aux = search_by_id(id);
         users.remove(aux);
         save_data();
     }
     public void change(User u)throws Exception{ //alterar
         User aux = search_by_id(u.getId());
         aux.setName(u.getName());
-        aux.setEmail(u.getEmail());
         aux.setUser(u.getUser());
         aux.setPassword(u.getPassword());
-        aux.setAge(u.getAge());
         aux.setCep(u.getCep());
         save_data();
     }
@@ -44,7 +42,7 @@ public class UserDAO {
         return temp;
     }
     public void save_data() throws Exception {
-        File f = new File("pessoas.txt");
+        File f = new File("users.txt");
 
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -58,7 +56,7 @@ public class UserDAO {
 
             //Escreveu uma linha no texto
             for(User u : users) {
-                bw.write(u.getName()+";"+u.getEmail()+";"+u.getUser()+";"+u.getPassword()+";"+u.getAge()+";"+u.getId());
+                bw.write(u.getName()+";"+u.getUser()+";"+u.getPassword()+";"+u.getId());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -77,7 +75,7 @@ public class UserDAO {
     }
 
     static {
-        File f = new File("pessoas.txt");
+        File f = new File("users.txt");
 
         FileReader fr = null;
         BufferedReader br = null;
@@ -93,7 +91,7 @@ public class UserDAO {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
 
-                User u = new User(dados[0], dados[1], dados[2], dados[3], Integer.parseInt(dados[4]),Integer.parseInt(dados[5]),Integer.parseInt(dados[6]));
+                User u = new User(dados[0], dados[1], dados[2], Integer.parseInt(dados[3]), Integer.parseInt(dados[4]));
                 users.add(u);
             }
 
