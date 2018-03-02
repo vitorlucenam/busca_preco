@@ -21,7 +21,7 @@ public class UserDAO {
         aux.setName(u.getName());
         aux.setUser(u.getUser());
         aux.setPassword(u.getPassword());
-        aux.setCep(u.getCep());
+        aux.setId(u.getId());
         save_data();
     }
     public User search_by_id(int id){
