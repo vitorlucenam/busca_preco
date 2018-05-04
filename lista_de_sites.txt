@@ -1,0 +1,18 @@
+Extra ----------- NOT OK
+
+Saraiva --------- NOT OK
+
+kabum -----------  NO OK
+
+
+MercadoLivre ---- OK
+
+Submarino ------- OK
+
+Americanas ------ OK
+
+Gearbest -------- OK
+ 
+olx ------------- OK
+
+

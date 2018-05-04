@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.buscar.Resultado">
+  <children>
+    <MenuBar layoutY="2.0" prefHeight="29.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem fx:id="buscaItem" mnemonicParsing="false" onAction="#go_to_search" text="Busca" />
+                  <MenuItem fx:id="historyItem" mnemonicParsing="false" onAction="#go_to_history" text="Historico" />
+                  <MenuItem fx:id="exitItem" mnemonicParsing="false" onAction="#go_to_login" text="Sair" />
+               </items>
+            </Menu>
+      </menus>
+    </MenuBar>
+    <TableView fx:id="tabela" editable="true" layoutY="29.0" prefHeight="340.0" prefWidth="600.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+      <columns>
+        <TableColumn fx:id="data" prefWidth="150.0" text="Data" />
+        <TableColumn fx:id="nome" prefWidth="161.0" text="Produto" />
+        <TableColumn fx:id="link" prefWidth="145.0" text="Site" />
+        <TableColumn fx:id="preco" prefWidth="143.0" text="Preço" />
+      </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+    </TableView>
+  </children>
+</AnchorPane>
