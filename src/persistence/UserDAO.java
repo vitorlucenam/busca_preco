@@ -1,6 +1,7 @@
 package persistence;
 
 import model.User;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -45,6 +46,18 @@ public class UserDAO {
         }
         return temp;
     }
+
+    public ArrayList<User> search_by_password(String inputPassword){
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        ArrayList<User> temp = new ArrayList<>();
+        for(User aux: users){
+            if(passwordEncryptor.checkPassword(inputPassword, aux.getPassword())){
+                temp.add(aux);
+            }
+        }
+        return temp;
+    }
+
 
     public void save_data() throws Exception {
         File f = new File("users.txt");

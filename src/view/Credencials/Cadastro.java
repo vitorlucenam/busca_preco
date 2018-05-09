@@ -6,11 +6,13 @@ package view.Credencials;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import controller.checkBox;
 import model.User;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import persistence.UserDAO;
 
 public class Cadastro {
@@ -41,37 +43,42 @@ public class Cadastro {
 
     @FXML
     void doCadastrar(ActionEvent event) throws Exception {
-        if (ok.is_text_empty(nameField) || ok.is_pasword_empty(passwordField) || ok.is_pasword_empty(passwordFieldConfirm)){
+        if (ok.is_text_empty(nameField) || ok.is_pasword_empty(passwordField) || ok.is_pasword_empty(passwordFieldConfirm)) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Você deixou um quadro em branco", ButtonType.OK);
             alert.showAndWait();
-        }else{
-           if (!passwordField.getText().equals(passwordFieldConfirm.getText())){
-               Alert alert = new Alert(Alert.AlertType.ERROR, "Senhas diferentes", ButtonType.OK);
-               alert.showAndWait();
-           }else{
-                 User novo = new User(nameField.getText(),passwordField.getText());
-                 UserDAO banco = new UserDAO();
-                 if (banco.search_by_name(nameField.getText()).isEmpty()){
-                     banco.insert(novo);
+        } else {
+            if (!passwordField.getText().equals(passwordFieldConfirm.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Senhas diferentes", ButtonType.OK);
+                alert.showAndWait();
+            } else {
 
-                 }else{
-                     Alert alert = new Alert(Alert.AlertType.ERROR, "Esse usuário já existe", ButtonType.OK);
-                     alert.showAndWait();
-                 }
+                UserDAO banco = new UserDAO();
+                if (banco.search_by_name(nameField.getText()).isEmpty()) {
+                    StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+                    String encryptedPassword = passwordEncryptor.encryptPassword(passwordField.getText());
+                    User newUser = new User(nameField.getText(), encryptedPassword);
+                    banco.insert(newUser);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Cadastro realizado com sucesso", ButtonType.OK);
+                    alert.showAndWait();
 
+                    if (alert.getResult() == ButtonType.OK) {
+                        view.MainJavaFX.changeScreen("login");
+                    }
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Esse usuário já existe", ButtonType.OK);
+                    alert.showAndWait();
+
+
+                }
+
+            }
+        }
+    }
 
 
                //banco.insert(novo);
 
-
-
-
-
-
-           }
-        }
-
-    }
 
     @FXML
     void nameText(ActionEvent event) {
